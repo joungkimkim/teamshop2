@@ -1,0 +1,268 @@
+ @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
+html{
+    position: relative;
+    min-height: 100%;
+    margin: 0;
+    text-align: center;
+}
+body{
+    min-height: 100%;
+}
+.footer {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 15px 0;
+    text-align: center;
+}
+.content{
+    margin-bottom: 100px;
+    margin-top: 50px;
+/*    margin-left: 200px;
+    margin-right: 200px;*/
+}
+.carousel-inner > .item {
+            height : 350px;
+        }
+        .margin{
+            margin-bottom : 30px;
+        }
+        .banner{
+            height : 300px;
+            position :  absolute; top:0; left:0;
+            width: 100%;
+            height: 100%;
+        }
+        .card-text{
+            text-overflow : ellipsis;
+            white-space : nowrap;
+            overflow : hidden;
+        }
+        a:hover{
+            text-decoration:none;
+        }
+        .center{
+            text-align:center;
+        }
+        .disabled>.page-link{
+            background-color: #ffffff;
+
+        }
+        .active>.page-link{
+            background-color: #6B8E23;
+            border-color: #6B8E23;
+        }
+        .page-link{
+            color: black;
+        }
+
+                .error{
+                  color: #bd2130;
+                 }
+
+        body {
+          font-family: 'Noto Sans KR', sans-serif;
+
+        }
+        .login-form{
+         text-align: center;
+        }
+
+        .login-form h1 {
+          font-size: 40px;
+          text-align: center;
+          margin-bottom: 50px;
+        }
+        div{
+        text-align: center;
+
+        }
+        .form{
+         margin-top: 100px;
+
+        }
+
+        .form-group {
+
+          width: 400px;
+          position: relative;
+           margin: 0 auto;
+
+        }
+
+        .form-group:first-child {
+          margin-top: 0;
+        }
+
+        .form-group input {
+          text-align: center;
+          width: 100%;
+          padding: 20px 10px 10px;
+          background-color: transparent;
+          border: 1px solid black;
+          border-bottom: 1px solid black;
+          font-size: 18px;
+          outline: none;
+        }
+        .login-button{
+             margin: 0 auto;
+            height: 70px;
+            weight: 150px;
+        }
+
+        .form-group label {
+          position: absolute;
+          left: 10px;
+          top: 15px;
+          font-size: 18px;
+          transition: top 0.5s ease;
+        }
+
+        .form-group label.warning {
+          color: red !important;
+          animation: warning 0.3s ease;
+          animation-iteration-count: 3;
+        }
+.form-group input:focus + label,
+.form-group input:valid + label {
+  top: -2px;
+  font-size: 13px;
+  color: #166caa;
+}
+
+.btn-area {
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.btn-area button {
+  width: 7%;
+  height: 50px;
+  margin: 0px 10px;
+  color: #fff;
+  background: #166caa;
+  border: none;
+  border-radius: 20px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.caption {
+  margin-top: 20px;
+  text-align: center;
+}
+
+.caption a {
+  margin: 0 20px;
+  font-size: 15px;
+  color: blue;
+  text-decoration: none;
+}
+
+
+
+ .carousel-inner > .item {
+            height : 700px;
+        }
+        .margin{
+            margin-bottom : 30px;
+        }
+        .banner{
+            height : 700px;
+            position :  absolute; top:0; left:0;
+            width: 100%;
+            height: 100%;
+        }
+        .card-text{
+            text-overflow : ellipsis;
+            white-space : nowrap;
+            overflow : hidden;
+        }
+        a:hover{
+            text-decoration:none;
+        }
+        .center{
+            text-align:center;
+        }*
+ {box-sizing: border-box}
+body {font-family: Verdana, sans-serif; margin:0}
+.mySlides {
+            display: none
+            height : 1000px;
+            position :  absolute; top:0; left:0;
+            width: 100%;
+            height: 100%;
+}
+.slideshow-container img {vertical-align: middle; width: 100%;}
+
+/* Slideshow container */
+.slideshow-container {
+
+   position :  absolute; top:0; left:0;
+    width: 100%;
+    height: 100%;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+    cursor: pointer;
+    position: absolute;
+    top: 50%;
+    width: auto;
+    padding: 16px;
+    margin-top: -22px;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: 0.6s ease;
+    border-radius: 0 3px 3px 0;
+    user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+    right: 0;
+    border-radius: 3px 0 0 3px;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+    cursor: pointer;
+    height: 5px;
+    width: 5px;
+    margin: 0 2px;
+    border-radius: 50%;
+    display: inline-block;
+    transition: background-color 0.6s ease;
+}.place h1{
+    text-align: center;
+}
+
+.active, .dot:hover {
+    background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+    -webkit-animation-name: fade;
+    -webkit-animation-duration: 1.5s;
+    animation-name: fade;
+    animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+@keyframes fade {
+    from {opacity: .4}
+    to {opacity: 1}
+}
+
+/* On smaller screens, decrease dot size */
+@media only screen and (max-width: 300px) {
+    .dot {visibility: hidden}
+}

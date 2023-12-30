@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<div th:fragment="header">
+    <nav class="navbar navbar-expand-md navbar-light bg-light">
+        <div class="container-fluid">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo03"
+                    aria-controls="navbarTogglerDemo03"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <a class="navbar-brand" href="/">Shop</a>
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                menu
+                            </button>
+
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="/dessert/bread">빵</a></li>
+                                <li><a class="dropdown-item" href="/dessert/cake">케이크</a></li>
+                                <li><a class="dropdown-item" href="/dessert/icecream">아이스크림</a></li>
+                                <li><a class="dropdown-item" href="/dessert/salad">샐러드</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 me-2">
+                    <li class="nav-item" sec:authorize="isAnonymous()">
+                        <a class="dropdown-item" href="/members/login">로그인</a>
+                    </li>
+                    <li class="nav-item">
+                        <div class="dropdown"  sec:authorize="isAuthenticated()">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"
+                                    th:text="${name} + '님 환영합니다.'">
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                                    <a class="dropdown-item" href="/admin/item/new">상품 등록</a>
+                                </li>
+                                <li sec:authorize="hasAnyAuthority('ROLE_ADMIN')">
+                                    <a class="dropdown-item" href="/admin/items">상품 관리</a>
+                                </li>
+                                <li><a class="dropdown-item"  href="/cart">장바구니</a></li>
+                                <li><a class="dropdown-item" href="/orders">구매이력</a></li>
+                                <li><a class="dropdown-item" href="/members/logout">로그아웃</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <form class="d-flex" th:action="@{/}" method="get">
+                    <input name="searchQuery" class="form-control me-2" type="search"
+                           placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                </form>
+        </div>
+    </nav>
+</div>
+</html>
