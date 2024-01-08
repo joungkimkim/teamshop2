@@ -8,6 +8,10 @@ import com.shop.repository.BoardRepository;
 import com.shop.repository.MemberRepository;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +53,7 @@ private final MemberService memberService;
         return this.boardRepository.findAll();
 
     }
+
     public Board deletesById(@Param("id") Long id) {
         return this.boardRepository.deleteByBoardId(id);
     }
@@ -66,6 +71,21 @@ private final MemberService memberService;
                 boardRepository.findById(id).orElseThrow()
         );
     }
+
+
+
+
+
+    public Page<Board> getBoardList(Pageable pageable) {
+
+
+        int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
+        pageable = PageRequest.of(page, 10); // <- Sort 추가
+
+        return boardRepository.findAll(pageable);
+    }
+
+
 
 
 

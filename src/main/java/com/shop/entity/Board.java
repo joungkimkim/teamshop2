@@ -13,6 +13,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.security.Principal;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "board")
@@ -31,6 +32,8 @@ public class Board{
     @ManyToOne
     @JoinColumn(name = "member_id")
     private Member member;
+
+
 
     public static Board writeBoard(BoardWriteFormDto boardWriteFormDto, Member member, MemberService memberService,
                                    Principal principal, HttpSession httpSession){

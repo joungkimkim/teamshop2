@@ -62,7 +62,7 @@
                 </span>
                 <span class="me-1">
                     <select th:field="*{type}" class="form-select">
-                        <option value="SCCON">스콘</option>
+                        <option value="SCOON">스콘</option>
                         <option value="BAGGLE" >베이글</option>
                         <option value="ICECREAM">아이스크림</option>
                         <option value="SALAD">샐러드</option>
@@ -130,6 +130,7 @@
             </div>
 
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
+
         </form>
     </div>
 

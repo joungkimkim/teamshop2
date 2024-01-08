@@ -37,17 +37,46 @@
 
                 </tr>
                 </thead>
+                <form method="post" enctype="multipart/form-data">
                 <tbody>
-                <tr th:each="list : ${boardList}">
+                <tr th:each="list : ${boardList}" \>
+
                     <td><a  th:text="${list.id}">글 ID</a></td>
-                    <td><a th:href="'/faq/boardDetail/'+${list.id}"  th:text="${list.title}">제목</a></td>
+                    <td><a th:href="'/faq/detail/'+${list.id}"  th:text="${list.title}">제목</a>
                     <td  th:text="${list.writer}">작성자</td>
                     <td  th:text="${list.localDate}">등록일</td>
                 </tr>
+
                 </tbody>
+                </form>
             </table>
         </div>
+        <nav style="text-align: center;">
+            <ul class="pagination justify-content-center"
+                th:with="start=${(boardList.number/maxPage)*maxPage +1},
+                    last=(${start + 9 < boardList.totalPages ? start + 9 : boardList.totalPages})">
 
+
+                <li th:class="${boardList.first} ? 'disabled'" class="page-item">
+                    <a class="page-link" th:href="${boardList.first} ? '#' :@{/faq/boardLists(page=${boardList.number})}" aria-label="Previous">
+                        <span aria-hidden="true">Previous</span>
+                    </a>
+                </li>
+
+                <li th:each="page: ${#numbers.sequence(start, last)}" th:class="${page == boardList.number + 1} ? 'active'" class="page-item">
+                    <a class="page-link" th:text="${page}" th:href="@{/faq/boardLists(page=${page})}"></a>
+                </li>
+
+                <li th:class="${boardList.last} ? 'disabled'" class="page-item">
+                    <a class="page-link" th:href="${boardList.last} ? '#' : @{/faq/boardLists(page=${boardList.number + 2})}" aria-label="Next">
+                        <span aria-hidden="true">Next</span>
+                    </a>
+                </li>
+
+
+            </ul>
+        </nav>
     </div> <!-- /container -->
+
 </div>
 </html>

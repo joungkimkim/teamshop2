@@ -13,6 +13,8 @@ public interface BoardRepository extends JpaRepository<Board,Long> {
     @Query(value = "SELECT * FROM board", nativeQuery = true)
     List<Board> findAll();
 
+
+
     @Modifying(clearAutomatically = true)
     @Query(value = "update board set title = ? , content = ? where board_id = ?", nativeQuery = true)
     int updateByBoardId(@Param("title")String title, @Param("content") String content, @Param("id") Long id);

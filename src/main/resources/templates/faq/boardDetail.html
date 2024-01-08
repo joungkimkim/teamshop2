@@ -11,6 +11,15 @@
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
     <style>
+    .form-control{
+
+        text-align: center;
+        }
+        .form-case{
+
+        text-align: left;
+        }
+
 
     </style>
 </th:block>
@@ -18,31 +27,30 @@
     <div class="container">
 
         <div class="py-5 text-center">
-            <h2></h2>
+            <h2>관리자</h2>
         </div>
 
         <!-- 추가 -->
         <form role="form"  method="post"  th:each="board : ${board}" enctype="multipart/form-data">
         <div>
-            <label for="boardId">ID</label>
-            <input type="text" id="boardId" name="id" class="form-control" value="1" readonly>
+            <input type="hidden" id="boardId" name="id" class="form-control" value="1" readonly>
         </div>
         <div>
-            <label for="boardSubject">제목</label>
+            <label for="boardSubject" class="form-case">제목</label>
             <input type="text" id="boardSubject" name="title" class="form-control" th:value="${board.title}">
         </div>
         <div>
-            <label for="name" >작성자</label>
+            <label for="name" class="form-case" >작성자</label>
             <input type="text" id="name" name="writer" class="form-control" th:value="${board.writer}" readonly>
         </div>
 
         <div>
-            <label for="regdate" >등록일</label>
+            <label for="regdate" class="form-case" >등록일</label>
             <input type="text" id="regdate" name="regdate" class="form-control" th:value="${board.localDate}"  readonly>
         </div>
 
         <div>
-            <label for="contents">글 내용</label>
+            <label for="contents" class="form-case">글 내용</label>
             <textarea cols="150" rows="10" id="contents"  class="form-control" name="content" th:text="${board.content}">
             </textarea>
         </div>
@@ -56,7 +64,7 @@
                       value="글 수정" th:formaction="@{'/faq/update/'+${id}}"sec:authorize="hasAnyAuthority('ROLE_ADMIN')" >
             </div>
             <div class="col">
-                <input type="button" class="w-100 btn btn-secondary btn-lg" onclick="location.href='/faq/boardList'" value="목록으로">
+                <input type="button" class="w-100 btn btn-secondary btn-lg" onclick="location.href='/faq/boardLists'" value="목록으로">
             </div>
 
             <div class="col">
