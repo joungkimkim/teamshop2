@@ -26,10 +26,10 @@ public class DessertController {
     private final HttpSession httpSession;
     private final ItemService itemService;
 
-    @GetMapping(value = {"/bread", "/bread/{page}"})
-    public String bread(ItemSearchDto itemSearchDto, Principal principal, Model model,@PathVariable("page") Optional<Integer> page){
+    @GetMapping(value = {"/baggle", "/baggle/{page}"})
+    public String baggle(ItemSearchDto itemSearchDto, Principal principal, Model model,@PathVariable("page") Optional<Integer> page){
         if (itemSearchDto.getSearchDessertType() == null) {
-            itemSearchDto.setSearchDessertType(Dessert.BREAD);
+            itemSearchDto.setSearchDessertType(Dessert.BAGGLE);
         }
         if(itemSearchDto.getSearchQuery() == null)
         {
@@ -38,17 +38,17 @@ public class DessertController {
         Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
         Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
         String name = memberService.loadMemberName(principal,httpSession);
-        model.addAttribute("bread",Dessert.BREAD);
+        model.addAttribute("baggle",Dessert.BAGGLE);
         model.addAttribute("name",name);
         model.addAttribute("items", items);
         model.addAttribute("itemSearchDto",itemSearchDto);
         model.addAttribute("maxPage",5);
-        return "/food/bread";
+        return "/food/baggle";
     }
-    @GetMapping(value = {"/cake", "/cake/{page}"})
-    public String cake(ItemSearchDto itemSearchDto, Principal principal, Model model,@PathVariable("page") Optional<Integer> page){
+    @GetMapping(value = {"/sccon", "/sccon/{page}"})
+    public String sccon(ItemSearchDto itemSearchDto, Principal principal, Model model,@PathVariable("page") Optional<Integer> page){
         if (itemSearchDto.getSearchDessertType() == null) {
-            itemSearchDto.setSearchDessertType(Dessert.CAKE);
+            itemSearchDto.setSearchDessertType(Dessert.SCOON);
 
         }
 
@@ -63,12 +63,12 @@ public class DessertController {
         model.addAttribute("items", items);
         model.addAttribute("itemSearchDto",itemSearchDto);
         model.addAttribute("maxPage",5);
-        return "/food/cake";
+        return "/food/sccon";
     }
-    @GetMapping(value = {"/salad", "/salad/{page}"})
-    public String salad(ItemSearchDto itemSearchDto, Principal principal, Model model,@PathVariable("page") Optional<Integer> page){
+    @GetMapping(value = {"/yogert", "/yogert/{page}"})
+    public String yogert(ItemSearchDto itemSearchDto, Principal principal, Model model,@PathVariable("page") Optional<Integer> page){
         if (itemSearchDto.getSearchDessertType() == null) {
-            itemSearchDto.setSearchDessertType(Dessert.SALAD);
+            itemSearchDto.setSearchDessertType(Dessert.YOGERT);
         }
         if(itemSearchDto.getSearchQuery() == null)
         {
@@ -81,7 +81,7 @@ public class DessertController {
         model.addAttribute("items", items);
         model.addAttribute("itemSearchDto",itemSearchDto);
         model.addAttribute("maxPage",5);
-        return "/food/salad";
+        return "/food/yogert";
     }
 
     @GetMapping(value = {"/icecream", "/icecream/{page}"})
@@ -106,6 +106,42 @@ public class DessertController {
         model.addAttribute("maxPage",5);
 
         return "/food/icecream";
+    }
+    @GetMapping(value = {"/salad", "/salad/{page}"})
+    public String salad(ItemSearchDto itemSearchDto, Principal principal, Model model,@PathVariable("page") Optional<Integer> page){
+        if (itemSearchDto.getSearchDessertType() == null) {
+            itemSearchDto.setSearchDessertType(Dessert.SALAD);
+        }
+        if(itemSearchDto.getSearchQuery() == null)
+        {
+            itemSearchDto.setSearchQuery("");
+        }
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
+        Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
+        String name = memberService.loadMemberName(principal,httpSession);
+        model.addAttribute("name",name);
+        model.addAttribute("items", items);
+        model.addAttribute("itemSearchDto",itemSearchDto);
+        model.addAttribute("maxPage",5);
+        return "/food/salad";
+    }
+    @GetMapping(value = {"/cake", "/cake/{page}"})
+    public String desert(ItemSearchDto itemSearchDto, Principal principal, Model model,@PathVariable("page") Optional<Integer> page){
+        if (itemSearchDto.getSearchDessertType() == null) {
+            itemSearchDto.setSearchDessertType(Dessert.CAKE);
+        }
+        if(itemSearchDto.getSearchQuery() == null)
+        {
+            itemSearchDto.setSearchQuery("");
+        }
+        Pageable pageable = PageRequest.of(page.isPresent() ? page.get() : 0, 5);
+        Page<MainItemDto> items = itemService.getMainItemPage(itemSearchDto, pageable);
+        String name = memberService.loadMemberName(principal,httpSession);
+        model.addAttribute("name",name);
+        model.addAttribute("items", items);
+        model.addAttribute("itemSearchDto",itemSearchDto);
+        model.addAttribute("maxPage",5);
+        return "/food/cake";
     }
 
 }

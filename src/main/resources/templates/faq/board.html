@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+      layout:decorate="~{layouts/layout1}">
+
+
+<!-- 사용자 CSS 추가 -->
+<th:block layout:fragment="css">
+    <style>
+
+    </style>
+</th:block>
+<div layout:fragment="content">
+
+    <div class="container" style="max-width: 1000px">
+        <div class="py-5 text-center">
+            <h2>공지사항</h2>
+        </div>
+
+        <div class="row">
+            <div class="col">
+                <button class="btn btn-primary float-end"
+                        onclick="location.href='/faq/writeForm'" type="button"
+                        sec:authorize="hasAnyAuthority('ROLE_ADMIN')">글 등록</button>
+            </div>
+        </div>
+
+        <hr class="my-4">
+        <div>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>등록일</th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="list : ${boardList}">
+                    <td><a  th:text="${list.id}">글 ID</a></td>
+                    <td><a th:href="'/faq/boardDetail/'+${list.id}"  th:text="${list.title}">제목</a></td>
+                    <td  th:text="${list.writer}">작성자</td>
+                    <td  th:text="${list.localDate}">등록일</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div> <!-- /container -->
+</div>
+</html>

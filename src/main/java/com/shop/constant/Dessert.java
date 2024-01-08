@@ -1,5 +1,5 @@
 package com.shop.constant;
 
 public enum Dessert {
-    BREAD,CAKE,ICECREAM,SALAD
+    BAGGLE,SCOON,ICECREAM,YOGERT,SALAD,DESSERT,CAKE
 }
