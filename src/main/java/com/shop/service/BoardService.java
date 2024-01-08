@@ -80,7 +80,7 @@ private final MemberService memberService;
 
 
         int page = (pageable.getPageNumber() == 0) ? 0 : (pageable.getPageNumber() - 1);
-        pageable = PageRequest.of(page, 10); // <- Sort 추가
+        pageable = PageRequest.of(page, 10,Sort.by(Sort.Direction.DESC,"id")); // <- Sort 추가
 
         return boardRepository.findAll(pageable);
     }

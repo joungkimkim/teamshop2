@@ -37,7 +37,7 @@
             </div>
             <div>
                 <label for="boardSubject" class="form-case">제목</label>
-                <input  id="boardSubject" name="title" class="form-control" th:value="${board.title}">
+                <input  id="boardSubject" name="title" class="form-control" th:value="${board.title}" readonly>
             </div>
             <div>
                 <label for="name" class="form-case" >작성자</label>
@@ -51,7 +51,7 @@
 
             <div>
                 <label for="contents" class="form-case">글 내용</label>
-                <textarea cols="150" rows="10" id="contents"  class="form-control" name="content" th:text="${board.content}">
+                <textarea cols="150" rows="10" id="contents"  class="form-control" name="content" th:text="${board.content}" readonly>
             </textarea>
             </div>
 

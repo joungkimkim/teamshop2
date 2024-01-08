@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
@@ -40,16 +41,15 @@ private final ItemService itemService;
 private final MemberRepository memberRepository;
 
     @GetMapping(value = "/boardLists")
-    public String boardList(Model model, @PageableDefault Pageable page, ItemSearchDto itemSearchDto, Principal principal,
+    public String boardList(Model model, @PageableDefault(direction = Sort.Direction.DESC) Pageable page, Principal principal,
                             HttpSession httpSession){
         Page<Board> boardList = boardService.getBoardList(page);
         System.out.println(boardList + " 여기테스트");
         model.addAttribute("boardList", boardList);
-        model.addAttribute("boardLists", boardList.getTotalElements());
         String name = memberService.loadMemberName(principal,httpSession);
         model.addAttribute("name",name);
         model.addAttribute("maxPage",5);
-       // model.addAttribute("boardList",boardService.getList());
+        // model.addAttribute("boardList",boardService.getList());
         return "/faq/board";
     }
     @GetMapping(value = "/writeForm")
