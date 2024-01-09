@@ -15,10 +15,6 @@
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
     <script th:inline="javascript">
         $(document).ready(function(){
-            var errorMessage = [[${errorMessage}]];
-            if(errorMessage != null){
-                alert(errorMessage);
-            }
             $("#detailAddress").change(function() {
                 let check = $("#postcode").val();
                 if (!check) {
@@ -78,9 +74,19 @@
 </th:block>
 
 <div layout:fragment="content">
-    <h1>회원가입</h1>
+    <h1>회원 정보 수정</h1>
     <div class="col-4 mx-auto">
-        <form action="/members/new" role="form" method="post" th:object="${memberFormDto}">
+        <form action="/profile/myInfoAS" role="form" method="post" th:object="${memberASDto}">
+
+            <div class="text-start row mb-3">
+                <label th:for="email" class="col-sm-2 col-form-label">이메일 주소</label>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input type="text" th:field="*{email}" class="form-control mb-1" readonly>
+                    </div>
+                </div>
+            </div>
+
             <div class="text-start row mb-3">
                 <label th:for="name" class="col-sm-2 col-form-label">이름</label>
                 <div class="col-sm-10">
@@ -89,30 +95,6 @@
                     </div>
                     <div class="form-check text-start" th:if="${#fields.hasErrors('name')}">
                         <p th:errors="*{name}" class="fieldError">Incorrect date</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-start row mb-3">
-                <label th:for="email" class="col-sm-2 col-form-label">이메일 주소</label>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input type="text" th:field="*{email}" class="form-control mb-1">
-                    </div>
-                    <div class="form-check text-start" th:if="${#fields.hasErrors('email')}">
-                        <p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="fieldError">Incorrect date</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-start row mb-3">
-                <label th:for="password" class="col-sm-2 col-form-label">비밀번호</label>
-                <div class="col-sm-10">
-                    <div class="form-check">
-                        <input type="password" th:field="*{password}" class="form-control mb-1">
-                    </div>
-                    <div class="form-check text-start" th:if="${#fields.hasErrors('password')}">
-                        <p th:errors="*{password}" class="fieldError">Incorrect date</p>
                     </div>
                 </div>
             </div>

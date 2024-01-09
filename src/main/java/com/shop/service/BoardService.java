@@ -53,29 +53,21 @@ private final MemberService memberService;
         return this.boardRepository.findAll();
 
     }
-
     public Board deletesById(@Param("id") Long id) {
         return this.boardRepository.deleteByBoardId(id);
     }
     public int updateByBoardId( @Param("title")String title,@Param("content")String content , @Param("id") Long id ){
-
         return this.boardRepository.updateByBoardId(title,content,id);
     }
 
     public Board getId(@Param("id") Long id) {
         return this.boardRepository.findByBoardId(id);
-
     }
     public void deleteById(@Param("id") Long id) {
         boardRepository.delete(
                 boardRepository.findById(id).orElseThrow()
         );
     }
-
-
-
-
-
     public Page<Board> getBoardList(Pageable pageable) {
 
 

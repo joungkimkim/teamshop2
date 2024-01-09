@@ -3,6 +3,7 @@ package com.shop.entity;
 import com.shop.config.Oauth2UserInfo;
 import com.shop.config.PrincipalOauth2UserService;
 import com.shop.constant.Role;
+import com.shop.dto.MemberASDto;
 import com.shop.dto.MemberFormDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -80,7 +81,10 @@ public class Member extends BaseEntity{
         this.provider = provider;
         return this;
     }
-    public Role getRoleKey() {
-        return Role.MEMBER_USER;
+
+    public void MemberAS(MemberASDto memberASDto) {
+        this.name = memberASDto.getName();
+        this.address = memberASDto.getAddress();
+        this.tel = memberASDto.getTel();
     }
 }

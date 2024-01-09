@@ -1,5 +1,6 @@
 package com.shop.service;
 
+import com.shop.dto.MemberASDto;
 import com.shop.entity.Member;
 import com.shop.repository.MemberRepository;
 import jakarta.servlet.http.HttpSession;
@@ -82,6 +83,16 @@ public class MemberService implements UserDetailsService {
         }
         //return "" + memberRepository.findByEmail(userEmail).getName() + "님 환영합니다.";
         return null;
+    }
+
+    public Member findMember(HttpSession httpSession, Principal principal) {
+        String email = loadMemberEmail(principal, httpSession);
+        return memberRepository.findByEmail(email);
+    }
+
+    public void memberAS(MemberASDto memberASDto) {
+        Member member = memberRepository.findByEmail(memberASDto.getEmail());
+        member.MemberAS(memberASDto);
     }
 }
 
