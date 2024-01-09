@@ -91,7 +91,7 @@
                 <label th:for="name" class="col-sm-2 col-form-label">이름</label>
                 <div class="col-sm-10">
                     <div class="form-check">
-                        <input type="text" th:field="*{name}" class="form-control">
+                        <input type="text" th:field="*{name}" class="form-control" readonly>
                     </div>
                     <div class="form-check text-start" th:if="${#fields.hasErrors('name')}">
                         <p th:errors="*{name}" class="fieldError">Incorrect date</p>
@@ -137,7 +137,7 @@
             </div>
 
             <div style="text-align: center">
-                <button type="submit" class="btn btn-success" style="">회원가입</button>
+                <button type="submit" class="btn btn-success" style="">수정</button>
             </div>
             <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}">
         </form>

@@ -1,10 +1,7 @@
 package com.shop.controller;
 
-import com.shop.dto.BoardWriteFormDto;
-import com.shop.dto.ItemSearchDto;
-import com.shop.dto.MainItemDto;
+import com.shop.dto.WriteFormDto;
 import com.shop.entity.Board;
-import com.shop.entity.Item;
 import com.shop.entity.Member;
 import com.shop.repository.BoardRepository;
 import com.shop.repository.MemberRepository;
@@ -12,23 +9,22 @@ import com.shop.service.BoardService;
 import com.shop.service.ItemService;
 import com.shop.service.MemberService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.repository.query.Param;
 import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
-import java.time.LocalDate;
-import java.util.Optional;
 
 @Controller
 @RequestMapping(value = "/faq")
@@ -49,25 +45,26 @@ private final MemberRepository memberRepository;
         String name = memberService.loadMemberName(principal,httpSession);
         model.addAttribute("name",name);
         model.addAttribute("maxPage",5);
-        // model.addAttribute("boardList",boardService.getList());
         return "/faq/board";
     }
     @GetMapping(value = "/writeForm")
-    public String writeForm(Model model){
-        model.addAttribute("writeFormDto",new BoardWriteFormDto());
+    public String writeForm(Model model, WriteFormDto writeFormDto,Principal principal,HttpSession httpSession){
+        String name = memberService.loadMemberName(principal,httpSession);
+        model.addAttribute("name",name);
+        model.addAttribute("writeFormDto",writeFormDto);
         return "/faq/writeBoardForm";
     }
-    @GetMapping(value = "/write")
-    public String write(BoardWriteFormDto boardWriteFormDto, Principal principal, HttpSession httpSession){
-        System.out.println(boardWriteFormDto.getTitle() +" 제목 넘어오는지 확인");
-        System.out.println(boardWriteFormDto.getContent() +" 내용 넘어오는지 확인");
-        Board board = boardService.writeBoard(boardWriteFormDto,principal,httpSession);
+    @PostMapping(value = "/write")
+    public String write(@Valid WriteFormDto writeFormDto, BindingResult bindingResult,
+                        Principal principal, HttpSession httpSession) {
+        if(bindingResult.hasErrors()) {
+            return "/faq/writeBoardForm";
+        }
+        Board board = boardService.writeBoard(writeFormDto, principal, httpSession);
         boardRepository.save(board);
         System.out.println("글작성완료");
         return "redirect:/";
     }
-
-
     @GetMapping(value = "/boardDetail/{id}")
     public String boardDetail(Model model, @PathVariable("id")Long boardId,Principal principal,HttpSession httpSession){
         String name = memberService.loadMemberName(principal,httpSession);
@@ -80,7 +77,6 @@ private final MemberRepository memberRepository;
     public String userBoardDetail(Model model, @PathVariable("id")Long boardId,Principal principal,HttpSession httpSession){
         String name = memberService.loadMemberName(principal,httpSession);
         System.out.println(boardService.getId(boardId));
-
         model.addAttribute("board",boardService.getId(boardId));
         model.addAttribute("name",name);
         return "/faq/userBoardDetail";
@@ -115,15 +111,14 @@ private final MemberRepository memberRepository;
     @PostMapping(value = "/update/{id}")
     public String update(@Param("title")String title, @Param("content")String content, @PathVariable("id") Long boardId, Model model){
         boardService.updateByBoardId(title,content,boardId);
-
-        return "redirect:/";
+        return "redirect:/faq/boardLists";
     }
 
     @PostMapping(value = "/delete/{id}")
     public String delete(@PathVariable("id") Long boardId,Model model){
         boardService.deleteById(boardId);
         model.addAttribute("id",boardId);
-        return "redirect:/";
+        return "redirect:/faq/boardLists";
     }
 
 }

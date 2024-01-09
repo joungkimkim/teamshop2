@@ -1,7 +1,7 @@
 package com.shop.service;
 
 
-import com.shop.dto.BoardWriteFormDto;
+import com.shop.dto.WriteFormDto;
 import com.shop.entity.Board;
 import com.shop.entity.Member;
 import com.shop.repository.BoardRepository;
@@ -30,7 +30,7 @@ private final MemberService memberService;
         return boardRepository.save(board); // 데이터베이스에 저장을 하라는 명령
     }
 
-    public Board writeBoard(BoardWriteFormDto boardWriteFormDto, Principal principal , HttpSession httpSession) {
+    public Board writeBoard(WriteFormDto writeFormDto, Principal principal , HttpSession httpSession) {
 
         String email= memberService.loadMemberEmail(principal,httpSession);
 
@@ -38,10 +38,10 @@ private final MemberService memberService;
 
         Member member1 = memberRepository.findByMemberId(member.getId());
 
-        Board board =  Board.writeBoard(boardWriteFormDto,member1,memberService,principal,httpSession);
+        Board board =  Board.writeBoard(writeFormDto,member1,memberService,principal,httpSession);
 
         if (board==null){
-            board = Board.writeBoard(boardWriteFormDto,member1,memberService,principal,httpSession);
+            board = Board.writeBoard(writeFormDto,member1,memberService,principal,httpSession);
             boardRepository.save(board);
         }
         boardRepository.save(board);
@@ -49,9 +49,7 @@ private final MemberService memberService;
 
     }
     public List<Board> getList() {
-
         return this.boardRepository.findAll();
-
     }
     public Board deletesById(@Param("id") Long id) {
         return this.boardRepository.deleteByBoardId(id);

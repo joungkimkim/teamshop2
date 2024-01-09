@@ -1,19 +1,14 @@
 package com.shop.entity;
 
-import com.shop.constant.Role;
-import com.shop.dto.BoardWriteFormDto;
-import com.shop.dto.MemberFormDto;
+import com.shop.dto.WriteFormDto;
 import com.shop.service.MemberService;
 import jakarta.persistence.*;
 import jakarta.servlet.http.HttpSession;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.security.Principal;
 import java.time.LocalDate;
-import java.util.List;
 
 @Entity
 @Table(name = "board")
@@ -35,7 +30,7 @@ public class Board{
 
 
 
-    public static Board writeBoard(BoardWriteFormDto boardWriteFormDto, Member member, MemberService memberService,
+    public static Board writeBoard(WriteFormDto boardWriteFormDto, Member member, MemberService memberService,
                                    Principal principal, HttpSession httpSession){
         Board board=new Board();
         String name = memberService.loadMemberName(principal,httpSession);

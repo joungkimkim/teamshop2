@@ -92,7 +92,9 @@ public class MemberService implements UserDetailsService {
 
     public void memberAS(MemberASDto memberASDto) {
         Member member = memberRepository.findByEmail(memberASDto.getEmail());
-        member.MemberAS(memberASDto);
+        member =member.MemberAS(memberASDto);
+
+        memberRepository.save(member);
     }
 }
 

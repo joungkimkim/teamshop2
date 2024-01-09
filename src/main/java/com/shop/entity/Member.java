@@ -82,9 +82,9 @@ public class Member extends BaseEntity{
         return this;
     }
 
-    public void MemberAS(MemberASDto memberASDto) {
-        this.name = memberASDto.getName();
+    public Member MemberAS(MemberASDto memberASDto) {
         this.address = memberASDto.getAddress();
         this.tel = memberASDto.getTel();
+        return this;
     }
 }

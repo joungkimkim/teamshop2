@@ -11,7 +11,9 @@
 <!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
     <style>
-
+        .fieldError{
+         color: #bd2130;
+          }
     </style>
 </th:block>
 <div layout:fragment="content">
@@ -21,30 +23,40 @@
             <h2>공지사항 등록</h2>
         </div>
 
-        <form action="/faq/write"  method="get" th:object="${writeFormDto}">
+        <form action="/faq/write"  role="form" method="post" th:object="${writeFormDto}">
             <div>
                 <input type="hidden" id="name" class="form-control"   value="testUser" placeholder="제목을 입력하세요.">
 
             </div>
 
             <div>
-                <label for="subject">제목</label>
-                <input type="text" id="subject" class="form-control" name="title" placeholder="제목을 입력하세요." th:filed="*{title}">
+                <label th:for="title">제목</label>
+                <input type="text" id="title" class="form-control" name="title" placeholder="제목을 입력하세요." th:filed="*{title}">
 
             </div>
+                    <div class="form-check text-start" th:if="${#fields.hasErrors('title')}">
+                        <p th:errors="*{title}" class="fieldError">Incorrect date</p>
+                    </div>
+
+
+
+
             <div>
-                <label for="contents">내용</label>
-                <textarea cols="150" rows="10" id="contents"  class="form-control" name="content" placeholder="내용을 입력하세요." th:filed="*{content}">
+                <label th:for="content">내용</label>
+                <textarea cols="150" rows="6" id="content"  class="form-control" name="content" placeholder="내용을 입력하세요." th:filed="*{content}">
 
             </textarea>
 
+            </div>
+            <div class="form-check text-start" th:if="${#fields.hasErrors('content')}">
+                <p th:errors="*{content}" class="fieldError">Incorrect date</p>
             </div>
 
             <hr class="my-4">
 
             <div class="row">
                 <div class="col">
-                    <input class="w-100 btn btn-primary btn-lg" type="submit" value="저장"/>
+                    <input class="w-100 btn btn-primary btn-lg" type="submit" value="글 등록"/>
                 </div>
                 <div class="col">
                     <button class="w-100 btn btn-secondary btn-lg"

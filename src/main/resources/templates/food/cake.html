@@ -58,7 +58,7 @@
 </th:block>
 
 <div layout:fragment="content">
-    <h1>디저트</h1>
+    <h1>케이크</h1>
     <form th:action="@{'/dessert/cake/'+${items.number}}" role="form" method="get" th:object="${items}">
         <input type="hidden" name="searchQuery" th:value="${itemSearchDto.searchQuery}">
         <div th:if="${not #strings.isEmpty(itemSearchDto.searchQuery)}" class="center">
